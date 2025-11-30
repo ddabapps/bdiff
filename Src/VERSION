@@ -1,6 +1,7 @@
 #! BSD 3-clause license: see LICENSE.md
 #
 #  BDiff/BPatch Version Information Macros for including in .vi files
+#  Some of these values are also used by Deploy.bat
 
 # Version & build numbers
 version=1.0.0

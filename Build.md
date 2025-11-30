@@ -115,15 +115,14 @@ Some simple tests can be run to check that _BDiff_ and _BPatch_ are working corr
 
 If you want to create zip files containing the executable programs and associated documentation do the following:
 
+* ensure the correct version number, build number, and optional version number suffix are set in `Src/VERSION`
 * open a terminal
 * switch to the root of the source tree
-* set up the necessary environment variables
+* set up the necessary environment variables: details are included as comments in `Deploy.bat`.
 * do
 
-    `> Deploy x.y.z`
+    `> Deploy`
 
-    where `x.y.z` are the major, minor and patch versions for the release.
-
-This will build 32 and 64 bit versions of both `BDiff.exe` and `BPatch.exe` and then package them, with documentation and tests, in zip files named `bdiff-exe32-x.y.z.zip` and `bdiff-exe64-x.y.z.zip`.
+This will build 32 and 64 bit versions of both `BDiff.exe` and `BPatch.exe` and then package them, with documentation and tests, in zip files named `bdiff-exe32-x.y.z.zip` and `bdiff-exe64-x.y.z.zip`. Note that `x.y.z` represents the release version number (and optional suffix), as specified as values of the `version` and `suffix` keys in `Src/VERSION`.
 
 All files generated during the build process will be created in the `_build` directory, as described in the _Compile_ section above. The zip file will be located in the `_build/release` directory.

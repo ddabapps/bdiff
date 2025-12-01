@@ -1,5 +1,21 @@
 # BDiff / BPatch Change Log
 
+## v1.0.0 - 2025-12-01
+
+_BDiff_ v1.0.0 (build 14) & _BPatch_ v1.0.0 (build 14)
+
+* Refactored some code, added some error detection and added some assertions to enforce constraints on public methods. These changes resulted from a code review [issue #37].
+* Updated deployment script, `Deploy.bat` to get the release's version number from the `VERSION` file instead of requiring the information to be passed on the command line [issue #45].
+* Changed to compile with Delphi 13 [issue #47].
+* Tests
+  * New test added that checks the result of a binary diff and patch using very large files that exceed the normal 10GiB file size limit [issue #48].
+  * Improved the appearance of the help screen displayed by the test scripts.
+* Documentation:
+  * Updated the name and URL of the project's GitHub repository following its move from _delphidabbler/bdiff_ to _ddabapps/bdiff_ [issue #46].
+  * Updated `Build.md` re the move to the Delphi 13 compiler and the revised operation of the deployment script.
+  * Updated `Tests/ReadMe.md` re changes to tests.
+  * General documentation overhaul to improve clarity, consistency and accuracy.
+
 ## v1.0.0-rc.1 - 2024-10-24
 
 _BDiff_ v1.0.0-rc.1 (build 13) & _BPatch_ v1.0.0-rc.1 (build 13)

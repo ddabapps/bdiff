@@ -14,7 +14,7 @@ BDiff computes differences between two binary files. Text files are treated as a
 
 BDiff handles insertion and deletion of data as well as changed bytes.
 
-Files larger than 10MiB (10,485,760 bytes) will not be processed unless the `--permit-large-files` option is specified (see _Options_ below). When this option is specified files up to 2GiB -1 (2,147,483,647 bytes) can be processed, which is the maximum file size supported by the bdiff [binary file format](#binary-format). However, bdiff may report an out of memory error for files below this limit, depending on the amount of memory available.
+Files larger than 10MiB (10,485,760 bytes) will not be processed unless the `--permit-large-files` option is specified (see [_Options_](#options) below). When this option is specified files up to 2GiB -1 (2,147,483,647 bytes) can be processed, which is the maximum file size supported by the BDiff [binary file format](#binary-format). However, BDiff may report an out of memory error for files below this limit, depending on the amount of memory available.
 
 ## Options
 
@@ -25,19 +25,19 @@ Files larger than 10MiB (10,485,760 bytes) will not be processed unless the `--p
 | `-b`         |             | Use binary format. |
 |              | `--format=FMT`| Select format by name: `FMT` is one of `binary`, `filtered` or `quoted`. The default is `quoted`. |
 |`-m N`        | `--min-equal=N`| Two chunks of data are recognized as being identical if they are at least `N` bytes long. The value must be in the range `8..1024`. The default is `24`. |
-| `-o FILENAME` | `--output=FILENAME`| Write diff to specified file instead of standard output. Specifying `--output=-` does nothing. Use as an alternative to shell redirection. |
+| `-o FILENAME` | `--output=FILENAME`| Write diff to specified file instead of standard output. Use as an alternative to shell redirection. Specifying `--output=-` does nothing. |
 | `-V`          | `--verbose`| Print status messages while processing input. |
 |               | `--permit-large-files` | Lifts the maximum file size limit from 10MiB to 2GiB-1. |
-|`-h`           | `--help`   | Show help screen and exit. |
-|`-v`           | `--version`| Show version number and exit. |
+| `-h`          | `--help`   | Show help screen and exit. |
+| `-v`          | `--version`| Show version number and exit. |
 
 ## Algorithm
 
-BDiff tries to locate maximum-length substrings of the new file in the old data. Substrings shorter than `N` (argument to the `-m` option) are not considered acceptable matches. Everything covered by such a substring is transmitted as a position, length pair. Everything else is literal data.
+BDiff tries to locate maximum-length substrings of the new file in the old file. Substrings shorter than `N` (argument to the `-m` option) are not considered acceptable matches. Everything covered by such a substring is transmitted as a position, length pair. Everything else is literal data.
 
 BDiff uses the block-sort technique to allow O(lgN) searches in the file, giving an estimated O(NlgN) algorithm on average.
 
-The program requires about five times as much memory as the old file, plus storage for the new file. This should be real memory, BDiff accesses all of it very often.
+The program requires about five times as much memory as the old file, plus storage for the new file. This should be real memory since BDiff accesses all of it very often.
 
 ## Output Formats
 
@@ -64,11 +64,11 @@ The binary format is machine-readable, and omits details for common blocks. All 
 
 Literally added data records have the following format:
 
-| Number of bytes | Description                |
-|-----------------|----------------------------|
-|  1              | `43` (ASCII code for `+`). |
-|  4              | Number of bytes.           |
-|  n              | Data.                      |
+| Number of bytes | Description                  |
+|-----------------|------------------------------|
+|  1              | `43` (ASCII code for `+`).   |
+|  4              | Number of bytes of data (n). |
+|  n              | Data.                        |
 
 Common block records have the following format:
 

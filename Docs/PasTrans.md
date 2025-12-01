@@ -23,5 +23,3 @@ This version is again a fairly literal translation. The only change (except for 
 ## Release 0.2.3 and later
 
 From release 0.2.3 _BDiff_ and _BPatch_ began to diverge from the original C source code. This divergence means there is no need for any further translation notes.
-
-Note that all v0.2.x releases will remain functionally very similar to v0.2.1, other than for bug fixes.

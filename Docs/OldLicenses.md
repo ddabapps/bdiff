@@ -66,4 +66,4 @@ From v0.2.5, licenses have been recorded in Git. The following links will displa
 
 ## License used for v1.x.x
 
-From release v1.0.0 the license was changed to the [BSD 3 clause license](https://github.com/ddabapps/bdiff/blob/master/LICENSE.md).
+From the first beta of release v1.0.0 the license was changed to the [BSD 3 clause license](https://github.com/ddabapps/bdiff/blob/master/LICENSE.md).

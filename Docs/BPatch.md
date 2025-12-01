@@ -24,9 +24,9 @@ In case of an error, `new-file` will not be touched.
 
 | Short option    | Long option          | Description |
 |-----------------|----------------------|-------------|
-| `-i PATCH-FILE` | `--input=PATCH-FILE` | Read patch from specified file instead of standard input. Specifying `--input=-` does nothing. Use as an alternative to shell redirection. |
-|`-h`             |  `--help`            | Show help screen and exit. |
-|`-v`             |  `--version`         | Show version number and exit. |
+| `-i PATCH-FILE` | `--input=PATCH-FILE` | Read patch from specified file instead of standard input. Use as an alternative to shell redirection. Specifying `--input=-` does nothing. |
+| `-h`            |  `--help`            | Show help screen and exit. |
+| `-v`            |  `--version`         | Show version number and exit. |
 
 ## Administrativia
 

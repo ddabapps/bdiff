@@ -141,12 +141,12 @@ Open a command console then enter the following commands. In the following, item
     
     >set BDIFFPATH=C:\Utils
    
-    >Test version
-    bdiff-1.0.0-rc.1 2024-10-24 (Windows 64 bit)
-    bpatch-1.0.0-rc.1 2024-10-24 (Windows 64 bit)
+    >test version
+    BDiff-v1.0.0 2025-12-01 (Windows 64 bit)
+    BPatch-v1.0.0 2025-12-01 (Windows 64 bit)
     Done
-    
-    >Test patch
+
+    >test patch
     --- Creating binary Patch with bdiff ---
     BDiff.exe: loading old file
     BDiff.exe: loading new file
@@ -167,7 +167,7 @@ Open a command console then enter the following commands. In the following, item
 
     Done
 
-    >Test clean
+    >test clean
     Done
 
 ### Example 2
@@ -178,15 +178,15 @@ Assume that `Test.bat` and `Test64.bat` are both in `D:\BDiff\Test` and that Del
     
     >D:
 
-    >Test64 version
-    bdiff-1.0.0-rc.1 2024-10-24 (Windows 64 bit)
-    bpatch-1.0.0-rc.1 2024-10-24 (Windows 64 bit)
+    >test64 version
+    BDiff-v1.0.0 2025-12-01 (Windows 64 bit)
+    BPatch-v1.0.0 2025-12-01 (Windows 64 bit)
     Done
-
-    >Test64 patch
+    
+    >test64 patch
     << output omitted: same as example 1 >>
 
-    >Test64 clean
+    >test64 clean
     Done
 
 ### Example 3
@@ -197,13 +197,13 @@ Assume that `Test.bat` and `Test32.bat` are both in `D:\BDiff\Test` and that Del
     
     >D:
 
-    >Test32 version
-    bdiff-1.0.0-rc.1 2024-10-24 (Windows 32 bit)
-    bpatch-1.0.0-rc.1 2024-10-24 (Windows 32 bit)
+    >test32 version
+    BDiff-v1.0.0 2025-12-01 (Windows 32 bit)
+    BPatch-v1.0.0 2025-12-01 (Windows 32 bit)
     Done
 
-    >Test32 patch
+    >test32 patch
     << output omitted: same as example 1 >>
 
-    >Test32 clean
+    >test32 clean
     Done

@@ -33,6 +33,7 @@ type
       SEEK_CURRENT = 1;
     ///  <summary>Redirects standard input from file handle <c>Handle</c>.
     ///  </summary>
+    ///  <exception>Raises an exception if the redirection fails.</exception>
     class procedure RedirectStdIn(const Handle: THandle);
 
     ///  <summary>Seeks within a given file.</summary>
@@ -44,15 +45,20 @@ type
       Boolean;
 
     ///  <summary>Checks if the given file handle is at end of file.</summary>
+    ///  <exception>An exception is raised if end of file can't be detected.
+    ///  </exception>
     class function AtEOF(Handle: THandle): Boolean;
 
-    ///  <summary>Gets and returns a ASCII character from a file or stdin.
+    ///  <summary>Gets and returns an ASCII character from a file or stdin.
     ///  </summary>
     ///  <param name="Handle">[in] Handle from which character is to be read.
     ///  </param>
     ///  <returns><c>Integer</c>. Character read, cast to integer or <c>EOF</c>
     ///  at end of file.</returns>
+    ///  <exception>An exception is raised if not at end of file and a character
+    ///  can't be read or if the check for end of file fails.</exception>
     class function GetCh(Handle: THandle): Integer;
+
   end;
 
 
@@ -62,7 +68,9 @@ implementation
 uses
   // Delphi
   System.SysUtils,
-  Winapi.Windows;
+  Winapi.Windows,
+  // Project
+  Common.Errors;
 
 
 { TIO }
@@ -71,6 +79,8 @@ class function TIO.AtEOF(Handle: THandle): Boolean;
 begin
   var CurPos := System.SysUtils.FileSeek(Handle, Int64(0), SEEK_CURRENT);
   var Size := FileSize(Handle);
+  if (CurPos = -1) or (Size = -1) then
+    Error('Failed to detect EOF');
   Result := CurPos = Size;
 end;
 
@@ -81,14 +91,16 @@ begin
   else
   begin
     var Ch: AnsiChar;
-    System.SysUtils.FileRead(Handle, Ch, SizeOf(Ch));
+    if System.SysUtils.FileRead(Handle, Ch, SizeOf(Ch)) = -1 then
+      Error('Can''t read character from input');
     Result := Integer(Ch);
   end;
 end;
 
 class procedure TIO.RedirectStdIn(const Handle: THandle);
 begin
-  Winapi.Windows.SetStdHandle(Winapi.Windows.STD_INPUT_HANDLE, Handle);
+  if not Winapi.Windows.SetStdHandle(Winapi.Windows.STD_INPUT_HANDLE, Handle) then
+    OSError;
 end;
 
 class function TIO.Seek(Handle: THandle; Offset: Int64; Origin: Integer):

@@ -23,6 +23,7 @@ type
   public
     ///  <summary>Redirects standard output to file handle <c>Handle</c>.
     ///  </summary>
+    ///  <exception>Raises an exception if the redirection fails.</exception>
     class procedure RedirectStdOut(const Handle: THandle);
   end;
 
@@ -32,14 +33,19 @@ implementation
 
 uses
   // Delphi
-  Winapi.Windows;
+  Winapi.Windows,
+  // Project
+  Common.Errors;
 
 
 { TIO }
 
 class procedure TIO.RedirectStdOut(const Handle: THandle);
 begin
-  Winapi.Windows.SetStdHandle(Winapi.Windows.STD_OUTPUT_HANDLE, Handle);
+  if not (
+    Winapi.Windows.SetStdHandle(Winapi.Windows.STD_OUTPUT_HANDLE, Handle)
+  ) then
+    OSError;
 end;
 
 end.

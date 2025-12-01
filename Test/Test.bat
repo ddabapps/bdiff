@@ -54,6 +54,7 @@ goto usage
 
 :: check which patch test to run
 if "%2"=="large" goto DoLargePatchTest
+if "%2"=="huge" goto DoHugePatchTest
 
 :: do small patch test
 echo --- Creating binary Patch with bdiff ---
@@ -96,6 +97,34 @@ echo.
 echo --- Testing restored Test3_Large file against original with fc ---
 fc Test2_Large Test3_Large
 echo.
+goto end
+
+:: do huge patch test
+:DoHugePatchTest
+echo *** WARNING: This test will take several minutes***
+set /p response="Enter YES to continue, anything else to abort: "
+echo.
+if "%response%"=="YES" (
+    echo --- Creating binary Patch_Huge with bdiff and --permit-large-files command ---
+    %BDiff% Test1_Huge Test2_Huge --output=Patch_Huge --verbose -b --permit-large-files
+    if errorlevel 1 (
+        set ErrorMsg=BDiff failed
+        goto error
+    )
+    echo.
+    echo --- Applying binary Patch_Huge with bpatch ---
+    %BPatch% Test1_Huge Test3_Huge --input=Patch_Huge
+    if errorlevel 1 (
+        set ErrorMsg=BPatch failed
+        goto error
+    )
+    echo.
+    echo --- Testing restored Test3_Huge file against original with fc ---
+    echo fc Test2_Huge Test3_Huge
+    echo.
+) else (
+    echo *** TEST ABORTED
+)
 goto end
 
 :: Run quoted diff test
@@ -170,27 +199,33 @@ goto end
 :DoClean
 del Test3 2>nul
 del Test3_Large 2>nul
+del Test3_Huge 2>nul
 del Diff 2>nul
 del Patch 2>nul
 del Patch_Large 2>nul
+del Patch_Huge 2>nul
 goto end
 
 :: Display usage information
 
 :usage
+:: check if user has set script name: use it if so, else use this script's name
+if "%SCRIPTNAME%" == "" set SCRIPTNAME=%0
 if not "%ErrorMsg%" == "" echo *** ERROR: %ErrorMsg%
 echo Usage is:
-echo   test.bat patch [large]
-echo     test binary patching (specify large to use larger test files)
-echo   test.bat quoted [view]
+echo   %SCRIPTNAME% patch [large ^| huge]
+echo     test binary patching
+echo       (specify large to use larger test files)
+echo       (specify huge to use ^>10MiB test files - takes a LONG time)
+echo   %SCRIPTNAME% quoted [view]
 echo     test quoted text diff (specify view to display diff in notepad)
-echo   test.bat filtered [view]
+echo   %SCRIPTNAME% filtered [view]
 echo     test filtered text diff (specify view to display diff in notepad)
-echo   test.bat version
+echo   %SCRIPTNAME% version
 echo     display version information for BDiff and BPatch
-echo   test.bat help
+echo   %SCRIPTNAME% help
 echo     display help screens for BDiff and BPatch
-echo   test.bat clean
+echo   %SCRIPTNAME% clean
 echo     remove all generated files
 echo For more information see Tests\ReadMe.md
 goto end

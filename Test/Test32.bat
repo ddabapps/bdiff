@@ -15,6 +15,9 @@ setlocal
 :: Set path to 32 bit exe directory relative to Test directory
 set BDIFFPATH=..\_build\Win32\exe
 
+:: Record the name of this script: used by Test.bat when displaying help
+set SCRIPTNAME=%0
+
 :: Run Test script, passing along all parameters
 call Test %*
 

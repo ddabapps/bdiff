@@ -14,8 +14,6 @@ _BDiff_ and _BPatch_ are derived from Stefan Reuther's _bdiff_ and _bpatch_ v0.2
 
 The original C source was translated into Object Pascal by [Peter D Johnson](https://gravatar.com/delphidabbler). The programs are based on updates of the Pascal code base.
 
-The programs should run on Windows 7 SP1 and later.
-
 For more information see the see the [project web pages](http://delphidabbler.com/software/bdiff).
 
 ## Installation & Uninstallation
@@ -26,7 +24,7 @@ The latest release can be downloaded from the project's [GitHub releases page](h
 
 Both programs are packaged together in a zip file. There is one zip file for the 32 bit Windows version and another for the 64 bit Windows version. Download the desired version and unzip the file.
 
-Copy the both executable files to the required location. Always place both programs in the same directory. No further installation is required.
+Copy both executable files to the required location. Always place both programs in the same directory. No further installation is required.
 
 You may want to modify the Windows PATH environment variable to include the location of the programs.
 

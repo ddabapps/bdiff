@@ -120,7 +120,7 @@ if "%response%"=="YES" (
     )
     echo.
     echo --- Testing restored Test3_Huge file against original with fc ---
-    echo fc Test2_Huge Test3_Huge
+    fc Test2_Huge Test3_Huge
     echo.
 ) else (
     echo *** TEST ABORTED
